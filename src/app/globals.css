@@ -1,26 +1,108 @@
-@import "tailwindcss";
+@import url("https://fonts.cdnfonts.com/css/general-sans");
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    scroll-behavior: smooth;
+    color-scheme: dark;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@layer utilities {
+    .container{
+        @apply lg:max-w-5xl;
+    }
+
+    .border-hsla {
+        @apply border border-white/20;
+    }
+
+    .nav-hover-btn {
+        @apply relative ms-10 text-xs uppercase text-blue-50 after:absolute after:-bottom-0.5 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-neutral-800 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100 dark:after:bg-white cursor-pointer;
+    }
+
+    .floating-nav {
+        @apply bg-gray-950 rounded-lg border;
+    }
+
+    .absolute-center {
+        @apply absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%];
+    }
+
+    .flex-center {
+        @apply flex justify-center items-center;
+    }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.indicator-line {
+    @apply h-1 w-px rounded-full bg-white transition-all duration-200 ease-in-out;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.indicator-line.active {
+    animation: indicator-line 0.5s ease infinite;
+    animation-delay: calc(var(--animation-order) * 0.1s);
+}
+
+@keyframes indicator-line {
+    0% {
+        height: 4px;
+        transform: translateY(-0px);
+    }
+    50% {
+        height: 16px;
+        transform: translateY(-4px);
+    }
+    100% {
+        height: 4px;
+        transform: translateY(-0px);
+    }
+}
+
+@keyframes wobble1 {
+    0%,
+    100% {
+        transform: translateY(0%) scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateY(-66%) scale(0.65);
+        opacity: 0.8;
+    }
+}
+
+@keyframes wobble2 {
+    0%,
+    100% {
+        transform: translateY(0%) scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateY(66%) scale(0.65);
+        opacity: 0.8;
+    }
+}
+
+
+/* Add to your global CSS file */
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-x-180 {
+  transform: rotateX(180deg);
+}
+
+.perspective-100 {
+  perspective: 100px;
 }
